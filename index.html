@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Iframe Proxy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
+      html,
+      body,
+      iframe {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe height="100%" width="100%" frameborder="0"></iframe>
+
+    <script>
+      var query = {};
+      (document.location.hash || "")
+        .replace("#", "")
+        .split("&")
+        .forEach(function(q) {
+          var split = q.split("=");
+          query[split[0]] = split[1];
+        });
+
+      if (query.url) {
+        document.querySelector("iframe").src = query.url;
+      }
+      if (query.refresh) {
+        // Forces a refresh
+        setInterval(() => {
+          document.querySelector("iframe").src += "";
+        }, query.refresh);
+      }
+
+      console.log(query.url, query.refresh);
+    </script>
+  </body>
+</html>
