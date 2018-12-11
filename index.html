@@ -38,7 +38,7 @@
         // Forces a refresh
         setInterval(() => {
           document.querySelector("iframe").src += "";
-        }, query.refresh);
+        }, query.refresh * 1000);
       }
 
       console.log(query.url, query.refresh);
